@@ -1,10 +1,11 @@
 import React from 'react';
+import Grocery from '../grocery/Grocery';
 
-const List = ({ items, name }) => (
+const List = ({ items, name, groceryClick }) => (
  <div>
    <h2>{name}</h2>
    <ul>
-     { items.map( item => <li key={item.id}>{item.name}</li>) }
+     { items.map( item => <Grocery key={item.id} {...item} groceryClick={groceryClick} /> )}
    </ul>
  </div>
 )

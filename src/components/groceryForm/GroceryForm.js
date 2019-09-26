@@ -19,9 +19,9 @@ class GroceryForm extends React.Component {
     return (
       <form onSubmit={ this.handleSubmit }>
       <input required
-             value={name}
+             value={ name }
              name="name"
-             onChange={this.handleChange}
+             onChange={ this.handleChange }
              placeholder='Add An Item' />
       </form>
     )

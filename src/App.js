@@ -1,6 +1,7 @@
 import React, { Component, } from 'react';
 import List from './components/list/List';
 import GroceryForm from './components/groceryForm/GroceryForm'
+import Grocery from './components/grocery/Grocery'
 
 class App extends Component {
   state = { items: [] };
@@ -11,19 +12,25 @@ class App extends Component {
      .substring(1);
   }
 
-  renderItems = () => {
-    const { items, } = this.state;
-    return items.map( item => {
-      return (
-        <li key={item.id}>{item.name}</li>
-      )
-    })
-  };
-
   addItem = (name) => {
     const { items } = this.state;
     const item = { name, id: this.getUniqId() , inCart: false }
     this.setState({ items: [item, ...items] });
+  }
+
+  handleClick = (id) => {
+    const { groceries } = this.state
+    this.setState({
+      groceries: groceries.map( grocery => {
+        if (grocery.id === id) {
+          return {
+            ...grocery,
+            inCart: !grocery.inCart
+          }
+        return grocery
+        }
+      })
+    })
   }
 
   render() {
@@ -32,7 +39,7 @@ class App extends Component {
     return (
       <div>
         < GroceryForm addItem={this.addItem} />
-        <List name = 'Grocery List' items={items} />
+        <List name = 'Grocery List' items={ items } groceryClick={this.handleClick}/>
       </div>
     )
   }
